@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Sim</title>
+        <link href="style.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="container">
+            <canvas width="500" height="500" id="canvas"> </canvas>
+            <div id="info">
+                <button id="pokaz" onclick="wektory()">Pokaz/ukryj wektory</button>
+                <button onclick="showLine()">Pokaz/ukryj linie</button>
+                <button id="pokaz" onclick="init()">Resetuj</button>
+                <input type="number" value="500" onkeyup="interval(this.value)" autocomplete="off" /><br/>
+                <button onclick="add()">Dodaj</button>
+                <button onclick="rm()">Usun</button>
+            </div>
+        </div>
+        <script src="sim.js"></script>
+    </body>
+</html>
