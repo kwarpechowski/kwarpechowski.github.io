@@ -26,6 +26,10 @@ body {
     margin: 4px 0;
 }
 
+#info input {
+    height: 30px;
+}
+
 #container {
     width: 755px;
     margin: 15px auto 0 auto;
