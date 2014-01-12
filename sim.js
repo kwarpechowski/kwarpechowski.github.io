@@ -1,7 +1,6 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-
 var N = 2,
     size = 500,
     x = [],
@@ -29,15 +28,15 @@ function color() {
     return color;
 }
 
-function roundPos (p) {
+function randomPos (p) {
     return randomFromInterval(p, size-p);
 }
 
 function init() {
     for(var i = 0; i<N; i++) {
         pr[i] = randomFromInterval(10, 40);
-        x[i] = roundPos(pr[i]);
-        y[i] = roundPos(pr[i]);
+        x[i] = randomPos(pr[i]);
+        y[i] = randomPos(pr[i]);
         hist[i] = [];
         c[i] = color();
     }
@@ -49,8 +48,8 @@ function add() {
     cx.push(0);
     cy.push(10);
     pr.push(p);
-    x.push(roundPos(p));
-    y.push(roundPos(p));
+    x.push(randomPos(p));
+    y.push(randomPos(p));
     hist.push([]);
     c.push(color());
 }
