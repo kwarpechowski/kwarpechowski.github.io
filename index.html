@@ -9,12 +9,12 @@
         <div id="container">
             <canvas width="500" height="500" id="canvas"> </canvas>
             <div id="info">
-                <button id="pokaz" onclick="wektory()">Pokaz/ukryj wektory</button>
-                <button onclick="showLine()">Pokaz/ukryj linie</button>
-                <button id="pokaz" onclick="init()">Resetuj</button>
+                <button id="pokaz" onclick="wektory()">Show/hide vectors</button>
+                <button onclick="showLineBtn()">Show/hide lines</button>
+                <button id="pokaz" onclick="init()">Reset</button>
                 <input type="number" value="500" onkeyup="interval(this.value)" autocomplete="off" /><br/>
-                <button onclick="add()">Dodaj</button>
-                <button onclick="rm()">Usun</button>
+                <button onclick="add()">Add circle</button>
+                <button onclick="rm()">Remove last circle</button>
             </div>
         </div>
         <script src="sim.js"></script>

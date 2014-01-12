@@ -17,6 +17,10 @@ var N = 2,
     line = false,
     x1,x2,y1,y2,t,n,u,l;
 
+function randomFromInterval(from,to) {
+    return Math.floor(Math.random()*(to-from+1)+from);
+}
+
 function color() {
     var letters = '0123456789ABCDEF'.split('');
     var color = '#';
@@ -25,14 +29,30 @@ function color() {
     return color;
 }
 
+function roundPos (p) {
+    return randomFromInterval(p, size-p);
+}
+
 function init() {
     for(var i = 0; i<N; i++) {
-        x[i] = Math.floor((Math.random()*380)+10);
-        y[i] = Math.floor((Math.random()*380)+10);
-        pr[i] = Math.floor((Math.random()*30)+10);
-        hist[i] = new Array();
+        pr[i] = randomFromInterval(10, 40);
+        x[i] = roundPos(pr[i]);
+        y[i] = roundPos(pr[i]);
+        hist[i] = [];
         c[i] = color();
     }
+}
+
+function add() {
+    var p = randomFromInterval(10, 40);
+    N+=1;
+    cx.push(0);
+    cy.push(10);
+    pr.push(p);
+    x.push(roundPos(p));
+    y.push(roundPos(p));
+    hist.push([]);
+    c.push(color());
 }
 
 function showVector(i) {
@@ -59,15 +79,16 @@ function showLine(i) {
     }
 }
 
+function showCircle(i) {
+    ctx.beginPath();
+    ctx.arc(x[i], y[i], pr[i], 0, 2 * Math.PI, false);
+    ctx.fillStyle = c[i];
+    ctx.fill();
+}
+
 function display() {
     for(var i = 0; i<N; i++) {
-
-        ctx.beginPath();
-        ctx.arc(x[i], y[i], pr[i], 0, 2 * Math.PI, false);
-        ctx.fillStyle = c[i];
-        ctx.fill();
-    
-
+        showCircle(i);
         if(line) showLine(i);
         if(show) showVector(i);
     }
@@ -78,17 +99,6 @@ function roundSpeed() {
         cx[i] = 0;
         cy[i] = 10;
     }
-}
-
-function add() {
-    N+=1;
-    cx.push(0);
-    cy.push(10);
-    x.push(Math.floor((Math.random()*380)+10));
-    y.push(Math.floor((Math.random()*380)+10));
-    pr.push(Math.floor((Math.random()*30)+10));
-    hist.push(new Array());
-    c.push(color());
 }
 
 function rm() {
@@ -106,7 +116,6 @@ function rm() {
 
 function run () {
     for (var i=0; i < N; i++){
-
 
             x[i] += cx[i];
             y[i] += cy[i];
@@ -214,11 +223,11 @@ function wektory () {
     else show = true;
 }
 
-function showLine () {
+function showLineBtn () {
     if(line) {
         line = false;
         for(var i = 0; i<N; i++) {
-            hist[i] = new Array();
+            hist[i] = [];
         }
     }else line = true;
 }
