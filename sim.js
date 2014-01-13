@@ -48,8 +48,8 @@ function add() {
        c: color(),
        hist: [],
        pr: p,
-       cx: 1,
-       cy: 10
+       cx: randomFromInterval(-10, 10),
+       cy: randomFromInterval(-10, 10),
     });
 }
 
@@ -94,8 +94,8 @@ function display() {
 
 function randomSpeed() {
     for(var i = 0; i<N; i++) {
-        objects[i].cx = 0;
-        objects[i].cy = 10;
+        objects[i].cx = randomFromInterval(-10, 10);
+        objects[i].cy = randomFromInterval(-10, 10);
     }
 }
 
