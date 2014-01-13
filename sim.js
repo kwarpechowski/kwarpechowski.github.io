@@ -112,7 +112,7 @@ function run () {
         
         oi.x += oi.cx;
         oi.y += oi.cy;
-        if (oi.y+oi.pr < size)
+        if (oi.y+oi.pr*2 < size)
             oi.cy = oi.cy + Math.sqrt(2*9.81*oi.y);
 
         if(line) oi.hist.push({x: oi.x, y: oi.y});
