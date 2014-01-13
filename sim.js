@@ -111,7 +111,7 @@ function run () {
         var oi = objects[i];
         
         oi.x += oi.cx;
-        console.log(oi.y+oi.pr, size);
+        oi.y += oi.cy;
         if (oi.y+oi.pr < size)
             oi.cy = oi.cy + Math.sqrt(2*9.81*oi.y);
 
