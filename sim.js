@@ -111,6 +111,7 @@ function run () {
         var oi = objects[i];
 
         oi.x += oi.cx;
+        oi.cy = oi.cy + Math.sqrt(2*9.81*oi.y);
         oi.y += oi.cy;
 
         if(line) oi.hist.push({x: oi.x, y: oi.y});
