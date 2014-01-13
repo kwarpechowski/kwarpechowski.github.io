@@ -109,10 +109,11 @@ function rm() {
 function run () {
     for (var i=0; i < N; i++){
         var oi = objects[i];
-
+        
         oi.x += oi.cx;
-        oi.cy = oi.cy + Math.sqrt(2*9.81*oi.y);
-        oi.y += oi.cy;
+        
+        if (oi.y+oi.pr < size)
+            oi.cy = oi.cy + Math.sqrt(2*9.81*oi.y);
 
         if(line) oi.hist.push({x: oi.x, y: oi.y});
 
