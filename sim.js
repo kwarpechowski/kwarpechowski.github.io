@@ -8,7 +8,13 @@ var N = 2,
     objects = [],
     show = false,
     line = false,
-    x1,x2,y1,y2,t,n,u,l;
+    gr = false,
+    tr = false,
+    speed = 50,
+    wpr = 0.1,
+    t,
+    x1,x2,y1,y2,t,n,u,l,
+    bazaKolizji = [];
 
 function randomFromInterval(from,to) {
     return Math.floor(Math.random()*(to-from+1)+from);
@@ -37,6 +43,15 @@ function init() {
            pr: p
         };
     }
+}
+
+function reset() {
+    init();
+    randomSpeed();
+
+    t = setInterval(function(){
+        step();
+    },speed);
 }
 
 function add() {
@@ -109,28 +124,51 @@ function rm() {
 function run () {
     for (var i=0; i < N; i++){
         var oi = objects[i];
+/*
+        if(bazaKolizji[i] && bazaKolizji[i].length > 0) {
+            for (var j in bazaKolizji[i]){
+                var oj = objects[bazaKolizji[i][j]];
+                var l =Math.sqrt(Math.pow(oj.x-oi.x, 2)+Math.pow(oj.y-oi.y, 2));
+                var r =l-(oi.pr+oj.pr);
+
+            
+                console.log(r);
+                    oi.x += oi.cx/10;
+                    oi.y += oi.cy/10;
+         
+
+            }
+            */
+       // }else{
+            oi.x += oi.cx;
+            oi.y += oi.cy;
+       // }
         
-        oi.x += oi.cx;
-        oi.y += oi.cy;
-        if (oi.y+oi.pr*2 < size)
-            oi.cy = oi.cy + Math.sqrt(2*9.81*oi.y);
 
         if(line) oi.hist.push({x: oi.x, y: oi.y});
 
         if(oi.x <= oi.pr) {
             oi.cx*=-1;
+            oi.cx*=0.9;
+            oi.x = oi.pr;
         }
 
         if(oi.x >= size-oi.pr) {
             oi.cx*=-1;
+            oi.cx*=0.9;
+            oi.x = size-oi.pr;
         }
 
         if(oi.y <= oi.pr) {
             oi.cy*=-1;
+            oi.y = oi.pr;
+            oi.cy*=0.9;
         }
 
         if(oi.y >= size-oi.pr) {
             oi.cy*=-1;
+            oi.y = size-oi.pr;
+            oi.cy*=0.9;
         }
         
         for(var j=0; j<N; ++j) {
@@ -145,7 +183,19 @@ function run () {
 
                 l =Math.sqrt(Math.pow(x2-x1, 2)+Math.pow(y2-y1, 2));
 
+                var l2 = Math.sqrt(Math.pow(x2+oi.cx-x1+oj.cx, 2)+Math.pow(y2+oi.cy-y1+oj.cy, 2));
+
+                if(l2 <= oi.pr+oj.pr) {
+                    if(bazaKolizji[i] == undefined) bazaKolizji[i] = [];
+                    if(bazaKolizji[j] == undefined) bazaKolizji[j] = [];
+                    bazaKolizji[i].push(j);
+                    bazaKolizji[j].push(i);
+                } 
+
                 if(l <= oi.pr+oj.pr) {
+
+                    bazaKolizji[i] = [];
+                    bazaKolizji[j] = [];
 
                     v1.x = oi.cx;
                     v1.y = oi.cy;
@@ -189,12 +239,27 @@ function run () {
                 }
             }
         }
+
+        if(gr && oi.y < size) {
+            oi.cy+=9.81*(speed*0.001);
+
+            if(tr) {
+                var sp = speed*0.001;
+                var p = (oi.pr*9.81*wpr*sp*sp)/2;
+                if(oi.cx > 0) {
+                    oi.cx-=p;
+                }else{
+                    oi.cx+=p;
+                }
+            }
+        }
     }
 }
 
 function interval(value) {
     var p  = parseInt(value);
     if(!isNaN(p)) {
+        speed = p;
         clearInterval(t);
         t = setInterval(function(){
             step();
@@ -216,15 +281,35 @@ function wektory () {
 function showLineBtn () {
     if(line) {
         line = false;
-        for(var i = 0; i<N; i++) {
+        for(var i = 0; i<N; i++) 
             objects[i].hist = [];
-        }
     }else line = true;
 }
 
-init();
-randomSpeed();
+function grawitacja () {
+    var d = document.getElementById("grawitacja");
+    var t = document.getElementById("tarcie");
+    if(gr) {
+        gr = false;
+        d.className = "";
+        t.className = "";
+    }else {
+        gr = true;
+        tr = false;
+        d.className = "active";
+        t.className = "show";
+    }
+}
 
-var t = setInterval(function(){
-    step();
-},200);
+function tarcie () {
+    var d = document.getElementById("tarcie");
+    if(tr) {
+        tr = false;
+        d.className = "";
+    }else {
+        tr = true;
+        d.className = "active";
+    }
+}
+
+reset();

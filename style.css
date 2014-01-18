@@ -52,3 +52,17 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffffff',GradientType=0 );
     border-radius: 10px 0 0 10px;
 }
+
+button.active {
+    background: #000;
+    color: #fff;
+}
+
+button#tarcie {
+    display: none;
+}
+
+button#tarcie.show ,
+button#tarcie.active {
+    display: block;
+}

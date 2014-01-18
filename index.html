@@ -11,10 +11,12 @@
             <div id="info">
                 <button id="pokaz" onclick="wektory()">Show/hide vectors</button>
                 <button onclick="showLineBtn()">Show/hide lines</button>
-                <button id="pokaz" onclick="init()">Reset</button>
-                <input type="number" value="500" onkeyup="interval(this.value)" autocomplete="off" /><br/>
+                <button id="pokaz" onclick="reset()">Reset</button>
+                <input type="number" value="50" onkeyup="interval(this.value)" autocomplete="off" /><br/>
                 <button onclick="add()">Add circle</button>
                 <button onclick="rm()">Remove last circle</button>
+                <button onclick="grawitacja()" id="grawitacja">Grawitacja on/off</button>
+                <button onclick="tarcie()" id="tarcie">Tarcie on/off</button>
             </div>
         </div>
         <script src="sim.js"></script>
