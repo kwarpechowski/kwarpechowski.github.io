@@ -11,7 +11,7 @@ var N = 2,
     gr = false,
     tr = false,
     speed = 50,
-    wpr = 0.1,
+    wpr = 0.01,
     t,
     x1,x2,y1,y2,t,n,u,l,
     bazaKolizji = [];
@@ -244,7 +244,7 @@ function run () {
             oi.cy+=9.81*(speed*0.001);
 
             if(tr) {
-                var sp = speed*0.0001;
+                var sp = speed*0.001;
                 var p = (oi.pr*9.81*wpr*sp*sp)/2;
                 if(oi.cx > 0) {
                     oi.cx-=p;
