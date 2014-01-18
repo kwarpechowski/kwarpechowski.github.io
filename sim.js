@@ -244,7 +244,7 @@ function run () {
             oi.cy+=9.81*(speed*0.001);
 
             if(tr) {
-                var sp = speed*0.001;
+                var sp = speed*0.0001;
                 var p = (oi.pr*9.81*wpr*sp*sp)/2;
                 if(oi.cx > 0) {
                     oi.cx-=p;
